@@ -1,4 +1,5 @@
-﻿using static System.Console;
+﻿using System.IO;
+using static System.Console;
 namespace DataProcessor
 {
     internal class FileProcessor
@@ -11,7 +12,15 @@ namespace DataProcessor
         }
         public void Process()
         {
-            WriteLine($"Begin Process of {InputFilePath}");
+            WriteLine($"开始处理 {InputFilePath}");
+            //check if file exists
+            if (!File.Exists(InputFilePath))
+            {
+                WriteLine($"错误：文件 {InputFilePath}不存在");
+                return;
+            }
+            string rootDirectoryPath = new DirectoryInfo(InputFilePath).Parent.Parent.FullName;
+            WriteLine($"文件根目录为: {rootDirectoryPath}");
         }
     }
 }
