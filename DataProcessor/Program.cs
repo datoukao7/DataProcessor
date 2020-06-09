@@ -38,6 +38,21 @@ namespace DataProcessor
         private static void ProcessDirectory(string directoryPath, string fileType)
         {
             //throw new NotImplementedException();
+            //var allFiles = Directory.GetFiles(directoryPath); // to get all files
+            switch (fileType)
+            {
+                case "TEXT":
+                    string[]  textFiles = Directory.GetFiles(directoryPath,"*.txt");
+                    foreach (var textFilePath in textFiles)
+                    {
+                        var fileProcessor = new FileProcessor(textFilePath);
+                        fileProcessor.Process();
+                    }
+                    break;
+                default:
+                    WriteLine($"错误 {fileType} is not supported");
+                    return;
+            }
 
         }
 
